@@ -1,5 +1,8 @@
 package GUI;
 
+import javax.crypto.spec.SecretKeySpec;
+
+import Verschlüsselung.Crypto;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -82,6 +85,68 @@ public class MainFrame extends Application{
 				new Question(primaryStage);
 			}
 		});
+	
+		
+
+//		String en = "Ich bin eine geheime Nachricht";
+//		String de;
+//		SecretKeySpec key;
+//		
+//		key = Crypto.keygen("Geheime Nachricht");
+//		System.out.println(key.toString());
+//		System.out.println(en);
+//		en = Crypto.encrypt(en, key);
+//		System.out.println(en);
+//		
+//		de = Crypto.decrypt(en, key);
+//		System.out.println(de);
+
+		
+		
+		encrypt.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent event) {
+				String text1 = encryptField.getText();
+				String text2;
+				String text3;
+				SecretKeySpec key;
+				
+				try {
+					key = Crypto.keygen("Geheime Nachricht");
+					
+					System.out.println(key.toString());
+					System.out.println(text1);
+					
+					text1 = Crypto.encrypt(text1, key);
+					System.out.println(text1);
+					
+					text2 = Crypto.decrypt(text1, key);
+					System.out.println(text2);
+					
+					decryptField.setText(text1);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		primaryStage.show();
 	}
