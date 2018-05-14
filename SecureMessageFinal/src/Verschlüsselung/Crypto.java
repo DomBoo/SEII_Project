@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.Base64.Encoder;
 import java.io.*;
+import java.util.Scanner;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -39,15 +40,15 @@ public class Crypto {
 		return Base64.getEncoder().encodeToString(key.getEncoded());
 	}
 	
-	public static void saveKey(SecretKeySpec key) {
-		File dir = new File("keys");
-		dir.mkdirs();
+	public static void saveKey(String name, SecretKeySpec key) {
+		File dir = new File("keys/keys");
 		
 		try { 
-			FileWriter fos = new FileWriter(dir.getAbsoluteFile() + "/keys");
+			FileWriter fos = new FileWriter("keys/keys", true);
 			BufferedWriter bf = new BufferedWriter(fos);
-			bf.write(Base64.getEncoder().encodeToString(key.getEncoded()));
-			bf.close();	
+			PrintWriter pw = new PrintWriter(bf);
+			pw.println(name + "#" + Base64.getEncoder().encodeToString(key.getEncoded()));
+			pw.close();	
 			}
 		catch(IOException e)
 		{
@@ -55,29 +56,35 @@ public class Crypto {
 		}
 	}
 	
-	public static SecretKeySpec importKey() {
+	public static SecretKeySpec importKey(String name) throws Exception {
 		File f = new File("keys/keys");
-		String key;
+		Scanner scan = new Scanner(f);
+		String key = null;
 		byte[] keydec = null;
 		
 		try
         {
-          FileReader fr = new FileReader(f);
-          BufferedReader br = new BufferedReader(fr);
-          key = br.readLine();
-          br.close();
-          keydec = Base64.getDecoder().decode(key.getBytes());
+          while(scan.hasNext()){
+              String line = scan.nextLine().toString();
+              if(line.contains(name)){
+            	  key = line;
+              } 
+         }
+        key = key.substring(key.indexOf("#")+1, key.length());
+        scan.close();
+        keydec = Base64.getDecoder().decode(key.getBytes());
         }
         catch(Exception fra)
         {
           System.out.println(fra);
         }
+		System.out.println("Beschnittender Sring: " + key);
         return new SecretKeySpec(keydec, 0, keydec.length, "AES");
 	}
 	
 	public static void main(String args[]) throws Exception {
 		String msg = "Ich bin eine geheime Nachricht";
-		String keyst = "Geheimer Key";
+		String keyst = "2";
 		String msgver;
 		SecretKeySpec key = Crypto.keygen(keyst);
 		
@@ -86,11 +93,10 @@ public class Crypto {
 		
 		msgver = Crypto.encrypt(msg, key);
 		System.out.println(msgver);
-		Crypto.saveKey(key);
+		//Crypto.saveKey("Helga" , key);
 		
-		SecretKeySpec keyim = Crypto.importKey();
+		SecretKeySpec keyim = Crypto.importKey("Helga");
 		System.out.println(Crypto.getKey(keyim));
-		
 		System.out.println(Crypto.decrypt(msgver, keyim));
 	}
 }
