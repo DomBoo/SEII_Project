@@ -1,0 +1,92 @@
+package GUI;
+
+import javafx.application.Application;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+public class MainFrame extends Application{
+	public static void main(String[] args) {
+		launch(args);
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception{
+		primaryStage.setTitle("Encrypt your Message");
+		
+		TextArea encryptField = new TextArea();
+		TextArea decryptField = new TextArea();
+		Button encrypt = new Button("Encrypt");
+		encrypt.setMaxWidth(100);
+		Button decrypt = new Button("Decrypt");
+		decrypt.setMaxWidth(100);
+		Button getKey = new Button("Get Key");
+		getKey.setMaxWidth(100);
+		Button showKey = new Button("Show Key");
+		showKey.setMaxWidth(100);
+		Button question = new Button("?");
+		
+		
+		
+		BorderPane border = new BorderPane();
+		VBox ButtonBox = new VBox();
+		VBox TextAreaBox = new VBox();
+		ButtonBox.setSpacing(50);
+		TextAreaBox.setSpacing(20);
+		HBox TopBar = new HBox();
+		
+		ObservableList list = ButtonBox.getChildren();
+		list.addAll(encrypt,decrypt,getKey,showKey);
+		
+		ObservableList list2 = TextAreaBox.getChildren();
+		list2.addAll(encryptField,decryptField);
+		
+		ObservableList list3 = TopBar.getChildren();
+		list3.addAll(question);
+		//grid.setAlignment(Pos.CENTER_LEFT);
+		//grid.setHgap(10);
+		//grid.setVgap(10);
+		//grid.setPadding(new Insets(20,20,20,20));
+		
+		//grid.setMargin(vBox, new Insets(0,50,0,50));
+		
+		Scene scene = new Scene(border, 800, 600);
+		primaryStage.setScene(scene);
+		
+		scene.getStylesheets().addAll(this.getClass().getResource("fenster.css").toExternalForm());
+		
+		border.setLeft(TextAreaBox);
+		border.setRight(ButtonBox);
+		border.setTop(question);
+		
+		
+		getKey.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				new KeyFrame(primaryStage);
+			}
+		});
+		
+		showKey.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				new KeyListFrame(primaryStage);
+			}
+		});
+		
+		
+		
+		primaryStage.show();
+	}
+}
