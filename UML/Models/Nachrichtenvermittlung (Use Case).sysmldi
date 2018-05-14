@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_YnOOoFOLEeiwFIAYbclKzA" activeDiagram="_YnOOoVOLEeiwFIAYbclKzA">
+  <model href="Nachrichtenvermittlung (Use Case).sysml#idPackage"/>
+  <diagrams xmi:id="_YnOOoVOLEeiwFIAYbclKzA" position="0,0" size="100,100" name="Nachrichtenvermittlung (Use Case)" viewport="0,0">
+    <property xmi:id="_YqgzMFOLEeiwFIAYbclKzA" key="pageFormatName" value="A4"/>
+    <property xmi:id="_YqgzMVOLEeiwFIAYbclKzA" key="diagramWidth" value="840"/>
+    <property xmi:id="_YqgzMlOLEeiwFIAYbclKzA" key="diagramHeight" value="1188"/>
+    <property xmi:id="_YqgzM1OLEeiwFIAYbclKzA" key="pageMarginName" value="Small Margin"/>
+    <property xmi:id="_YqgzNFOLEeiwFIAYbclKzA" key="diagramTopMargin" value="20"/>
+    <property xmi:id="_YqgzNVOLEeiwFIAYbclKzA" key="diagramBottomMargin" value="20"/>
+    <property xmi:id="_YqgzNlOLEeiwFIAYbclKzA" key="diagramLeftMargin" value="20"/>
+    <property xmi:id="_YqgzN1OLEeiwFIAYbclKzA" key="diagramRightMargin" value="20"/>
+    <property xmi:id="_YqgzOFOLEeiwFIAYbclKzA" key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_YnOOolOLEeiwFIAYbclKzA" presentation="org.topcased.modeler.uml.usecasediagram">
+      <element href="Nachrichtenvermittlung (Use Case).sysml#idPackage"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" xmi:id="_IHOxoFOMEeiwFIAYbclKzA" position="45,78" size="596,418">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_IHOxoVOMEeiwFIAYbclKzA" presentation="default">
+        <element href="Nachrichtenvermittlung (Use Case).sysml#_IHPYsFOMEeiwFIAYbclKzA"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_uTYZEFOLEeiwFIAYbclKzA" position="257,149" size="120,80">
+        <anchorage xmi:id="_zS0HgVOLEeiwFIAYbclKzA" graphEdge="_zTD_IFOLEeiwFIAYbclKzA _9MKLMVOLEeiwFIAYbclKzA"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_uTYZEVOLEeiwFIAYbclKzA" presentation="default">
+          <element href="Nachrichtenvermittlung (Use Case).sysml#_uTZAIFOLEeiwFIAYbclKzA"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_u7xOwFOLEeiwFIAYbclKzA" position="261,284" size="120,80">
+        <anchorage xmi:id="_9MKLMFOLEeiwFIAYbclKzA" graphEdge="_9MKLMVOLEeiwFIAYbclKzA"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_u7x10FOLEeiwFIAYbclKzA" presentation="default">
+          <element href="Nachrichtenvermittlung (Use Case).sysml#_u7x10VOLEeiwFIAYbclKzA"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_aJOM4FOLEeiwFIAYbclKzA" position="700,111" size="80,80">
+      <anchorage xmi:id="_3KGiIFOLEeiwFIAYbclKzA" graphEdge="_3KHJMFOLEeiwFIAYbclKzA"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_aJOM4VOLEeiwFIAYbclKzA" presentation="default">
+        <element href="Nachrichtenvermittlung (Use Case).sysml#_aJ47QFOLEeiwFIAYbclKzA"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_bxcH4FOLEeiwFIAYbclKzA" position="700,249" size="80,80">
+      <anchorage xmi:id="_zS0HgFOLEeiwFIAYbclKzA" graphEdge="_zTD_IFOLEeiwFIAYbclKzA"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bxcH4VOLEeiwFIAYbclKzA" presentation="default">
+        <element href="Nachrichtenvermittlung (Use Case).sysml#_bxcu8FOLEeiwFIAYbclKzA"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_qCSXUFOLEeiwFIAYbclKzA" position="64,109" size="120,80">
+      <anchorage xmi:id="_3KGiIVOLEeiwFIAYbclKzA" graphEdge="_3KHJMFOLEeiwFIAYbclKzA _B2bh8FOMEeiwFIAYbclKzA"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_qCS-YFOLEeiwFIAYbclKzA" presentation="default">
+        <element href="Nachrichtenvermittlung (Use Case).sysml#_qCa6MFOLEeiwFIAYbclKzA"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_rXQmMFOLEeiwFIAYbclKzA" position="75,385" size="120,80">
+      <anchorage xmi:id="_BQ7BIVOMEeiwFIAYbclKzA" graphEdge="_BQ7BIlOMEeiwFIAYbclKzA"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_rXRNQFOLEeiwFIAYbclKzA" presentation="default">
+        <element href="Nachrichtenvermittlung (Use Case).sysml#_rXRNQVOLEeiwFIAYbclKzA"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_sKc9sFOLEeiwFIAYbclKzA" position="71,243" size="120,80">
+      <anchorage xmi:id="_BQ7BIFOMEeiwFIAYbclKzA" graphEdge="_BQ7BIlOMEeiwFIAYbclKzA _B2bh8FOMEeiwFIAYbclKzA"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sKc9sVOLEeiwFIAYbclKzA" presentation="default">
+        <element href="Nachrichtenvermittlung (Use Case).sysml#_sKdkwFOLEeiwFIAYbclKzA"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_zTD_IFOLEeiwFIAYbclKzA" anchor="_zS0HgFOLEeiwFIAYbclKzA _zS0HgVOLEeiwFIAYbclKzA">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_zTD_IVOLEeiwFIAYbclKzA" presentation="default">
+        <element href="Nachrichtenvermittlung (Use Case).sysml#_zTD_JlOLEeiwFIAYbclKzA"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_zTD_IlOLEeiwFIAYbclKzA" visible="false" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_zTD_I1OLEeiwFIAYbclKzA" visible="false" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectOffset" xmi:id="_zTD_JFOLEeiwFIAYbclKzA" id="nameEdgeObject" offset="0,10"/>
+      <contained xsi:type="di:EdgeObjectOffset" xmi:id="_zTD_JVOLEeiwFIAYbclKzA" id="stereotypeEdgeObject" offset="0,-10"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_3KHJMFOLEeiwFIAYbclKzA" anchor="_3KGiIFOLEeiwFIAYbclKzA _3KGiIVOLEeiwFIAYbclKzA">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_3KHJMVOLEeiwFIAYbclKzA" presentation="default">
+        <element href="Nachrichtenvermittlung (Use Case).sysml#_3KHJNlOLEeiwFIAYbclKzA"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_3KHJMlOLEeiwFIAYbclKzA" visible="false" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_3KHJM1OLEeiwFIAYbclKzA" visible="false" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectOffset" xmi:id="_3KHJNFOLEeiwFIAYbclKzA" id="nameEdgeObject" offset="0,10"/>
+      <contained xsi:type="di:EdgeObjectOffset" xmi:id="_3KHJNVOLEeiwFIAYbclKzA" id="stereotypeEdgeObject" offset="0,-10"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_9MKLMVOLEeiwFIAYbclKzA" anchor="_zS0HgVOLEeiwFIAYbclKzA _9MKLMFOLEeiwFIAYbclKzA">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_9MKLMlOLEeiwFIAYbclKzA" presentation="default">
+        <element href="Nachrichtenvermittlung (Use Case).sysml#_9MKLNFOLEeiwFIAYbclKzA"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" xmi:id="_9MKLM1OLEeiwFIAYbclKzA" id="nameEdgeObject"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_BQ7BIlOMEeiwFIAYbclKzA" anchor="_BQ7BIFOMEeiwFIAYbclKzA _BQ7BIVOMEeiwFIAYbclKzA">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_BQ7BI1OMEeiwFIAYbclKzA" presentation="default">
+        <element href="Nachrichtenvermittlung (Use Case).sysml#_BQ7oMFOMEeiwFIAYbclKzA"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" xmi:id="_BQ7BJFOMEeiwFIAYbclKzA" id="nameEdgeObject"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_B2bh8FOMEeiwFIAYbclKzA" anchor="_3KGiIVOLEeiwFIAYbclKzA _BQ7BIFOMEeiwFIAYbclKzA">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_B2bh8VOMEeiwFIAYbclKzA" presentation="default">
+        <element href="Nachrichtenvermittlung (Use Case).sysml#_B2bh81OMEeiwFIAYbclKzA"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" xmi:id="_B2bh8lOMEeiwFIAYbclKzA" id="nameEdgeObject"/>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>
