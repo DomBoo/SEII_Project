@@ -1,5 +1,7 @@
 package GUI;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -30,8 +32,18 @@ public class DecryptFrame {
 		
 		newWindow.setX(pStage.getX()+225);
 		newWindow.setY(pStage.getY()+200);
+		
+		ok.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				newWindow.close();
+			}
+		});
 	
 		newWindow.initModality(Modality.APPLICATION_MODAL);
+		
+		newWindow.setResizable(false);
 		newWindow.show();
 	}
 }

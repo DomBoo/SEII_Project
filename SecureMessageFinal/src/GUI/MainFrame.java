@@ -2,6 +2,8 @@ package GUI;
 
 import java.security.NoSuchAlgorithmException;
 
+import javax.crypto.spec.SecretKeySpec;
+
 import Verschlüsselung.Key;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,7 +15,11 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class MainFrame {
+	
 	public MainFrame(Stage primaryStage) {
+//		Key k = new Key();
+//		k.keyGen();
+		
 		//Titel des Fensters
 		primaryStage.setTitle("Encrypt your Message");
 		
@@ -34,8 +40,8 @@ public class MainFrame {
 		showKey.setMaxWidth(100);
 		
 		Button help = new Button("?");
-		
 		Button about = new Button("About");
+		about.setMaxWidth(100);
 		
 		//Layout des Hauptfensters anlegen
 		
@@ -113,9 +119,37 @@ public class MainFrame {
 		encrypt.setOnAction(new EventHandler<ActionEvent>() {					
 			@Override
 			public void handle(ActionEvent e) {
-				Key k = new Key();
-				k.keyGen();
+//				k.keysEinlesen();
+//				
+//				System.out.println("PublicKey: ");
+//				System.out.println(k.getPublicKey());
+//				System.out.println("PrivateKEy: ");
+//				System.out.println(k.getPrivateKey());
 				
+				String msg = encryptField.getText();
+				String msgver = null;
+	
+				String keyst = "Extrem 1Lang dsdddfdfg";
+	
+				SecretKeySpec key = null;
+				try {
+					key = Key.keygen(keyst);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+
+				System.out.println(msg);
+				System.out.println(Key.getKey(key));
+				
+				try {
+					msgver = Key.encrypt(msg, key);
+					decryptField.setText(msgver);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				System.out.println(msgver);
+				Key.saveKey(key);
+
 				new EncryptFrame(primaryStage);
 			}
 		});
@@ -125,6 +159,18 @@ public class MainFrame {
 		decrypt.setOnAction(new EventHandler<ActionEvent>() {					
 			@Override
 			public void handle(ActionEvent e) {
+				String msgver = decryptField.getText();
+				
+				SecretKeySpec keyim = Key.importKey();
+				System.out.println(Key.getKey(keyim));
+		
+				try {
+					decryptField.setText(Key.decrypt(msgver, keyim));
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				new DecryptFrame(primaryStage);
 			}
 		});
@@ -132,6 +178,7 @@ public class MainFrame {
 		primaryStage.setX(primaryStage.getX()-150);
 		primaryStage.setY(primaryStage.getY()-100);
 		
+		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 }

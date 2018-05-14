@@ -1,7 +1,12 @@
 package GUI;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -12,9 +17,15 @@ public class KeyListFrame {
 				+ "Klaus 1234\n"
 				+ "Eric 1345\n"
 				+ "Max 4567");
+		Button ok = new Button("OK");
 		
-		StackPane frame = new StackPane();
-		frame.getChildren().add(lab);
+		GridPane frame = new GridPane();
+		
+		frame.setAlignment(Pos.CENTER);
+		frame.setHgap(20);
+		frame.setVgap(20);
+		frame.add(lab, 0, 0);
+		frame.add(ok,1,1);
 		
 		Scene scene = new Scene(frame,600,100);
 		
@@ -25,7 +36,17 @@ public class KeyListFrame {
 		newWindow.setX(pStage.getX()+100);
 		newWindow.setY(pStage.getY()+200);
 	
+		ok.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				newWindow.close();
+			}
+		});
+		
 		newWindow.initModality(Modality.APPLICATION_MODAL);
+		
+		newWindow.setResizable(false);
 		newWindow.show();
 	}
 }

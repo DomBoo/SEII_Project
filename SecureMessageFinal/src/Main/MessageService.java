@@ -1,5 +1,6 @@
 package Main;
 
+import java.awt.event.KeyAdapter;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -12,6 +13,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -22,7 +25,7 @@ public class MessageService {
 			
 		//Elemente des Hauptfensters initialisieren
 		Label name = new Label("User");
-		Label password = new Label("Pssword");
+		Label password = new Label("Password");
 		PasswordField passwordField = new PasswordField();
 		TextField nameField = new TextField();
 		Button ok = new Button("OK");
@@ -47,6 +50,7 @@ public class MessageService {
 		grid.add(passwordField, 1, 1);
 		grid.add(ok, 0, 2);
 		
+		
 		ok.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -55,8 +59,8 @@ public class MessageService {
 				
 				try {
 		            int zeilen = 1;
-		            FileReader frUser = new FileReader(new File("C:\\Users\\Dominic\\Desktop\\Software Engineering Beleg\\SecureMessageFinal\\src\\Main\\user.txt"));
-		            FileReader frPassword  = new FileReader(new File("C:\\Users\\Dominic\\Desktop\\Software Engineering Beleg\\SecureMessageFinal\\src\\Main\\password.txt"));
+		            FileReader frUser = new FileReader(new File("C:\\Users\\s75954\\Desktop\\Software Engineering\\SecureMessage\\src\\Main\\user.txt"));
+		            FileReader frPassword  = new FileReader(new File("C:\\Users\\s75954\\Desktop\\Software Engineering\\SecureMessage\\src\\Main\\password.txt"));
 		            BufferedReader brUser = new BufferedReader(frUser);
 		            BufferedReader brPassword = new BufferedReader(frPassword);
 		            
@@ -89,10 +93,55 @@ public class MessageService {
 			}
 		});
 		
+		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent event) {
+				if(event.getCode().equals(KeyCode.ENTER)){
+					String pass = "";
+					
+					try {
+			            int zeilen = 1;
+			            FileReader frUser = new FileReader(new File("C:\\Users\\s75954\\Desktop\\Software Engineering\\SecureMessage\\src\\Main\\user.txt"));
+			            FileReader frPassword  = new FileReader(new File("C:\\Users\\s75954\\Desktop\\Software Engineering\\SecureMessage\\src\\Main\\password.txt"));
+			            BufferedReader brUser = new BufferedReader(frUser);
+			            BufferedReader brPassword = new BufferedReader(frPassword);
+			            
+			            String z = brUser.readLine();
+			            pass = brPassword.readLine();
+			            while (!z.isEmpty()) {
+			                if (z.equals(nameField.getText())) {
+			                   // System.out.println("Ich habe das Wort \"" + nameField.getText() + "\" in Zeile " + zeilen + " gefunden.");
+			                    z = null;
+			                    brUser = null;
+			                    frUser = null;
+			                    break;
+			                } else {
+			                    zeilen++;
+			                    z = brUser.readLine();
+			                    pass = 	brPassword.readLine();                   
+			                }
+			            }
+			        } catch (Exception e1) {
+			           //System.out.println("Suchfunktion beendet.");
+			           
+			        }
+					//System.out.println(pass);
+					if(passwordField.getText().equals(pass)) {
+						new MainFrame(primaryStage);
+					}else {
+						grid.add(new Label("Falsche Eingabe"), 1, 2);
+						//System.out.println(passwordField.getText());
+					}
+				}
+			}
+		});
+		
+		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 	
-	public void initDataBase() {
+	public void form() {
 		
 	}
 }
