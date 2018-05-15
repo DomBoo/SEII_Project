@@ -84,7 +84,7 @@ public class Crypto {
 	
 	public static void main(String args[]) throws Exception {
 		String msg = "Ich bin eine geheime Nachricht";
-		String keyst = "2";
+		String keyst = "Test";
 		String msgver;
 		SecretKeySpec key = Crypto.keygen(keyst);
 		
