@@ -12,15 +12,28 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class Login extends User{
+	
+	/**
+	 * Elemente des Fensters
+	 */
 	private Label nameLab = new Label("User");
 	private Label passwordLab = new Label("Password");
 	private PasswordField passwordField = new PasswordField();
 	private TextField nameField = new TextField();
-	private Button okButton = new Button("OK");		
+	private Button okButton = new Button("OK");	
+	
+	/**
+	 * Layout des Fensters
+	 */
 	private GridPane grid = new GridPane();
 	private Scene scene = new Scene(grid, 300, 200);
 
-	public void Fenster(Stage primaryStage) {
+	/**
+	 * Erstellt das Fenster
+	 * 
+	 * @param primaryStage
+	 */
+	public void createWindow(Stage primaryStage) {
 		primaryStage.setTitle("Encrypt your Message");		
 				
 		grid.setAlignment(Pos.CENTER);
@@ -57,6 +70,11 @@ public class Login extends User{
 		primaryStage.show();
 	}
 	
+	/**
+	 * Fragt den User nach Usernamen und Passwort
+	 * 
+	 * @param primaryStage
+	 */
 	public void Log(Stage primaryStage) {
 		String dir = System.getProperty("user.dir");
 		
@@ -95,7 +113,11 @@ public class Login extends User{
 		}
 	}
 	
+	/**
+	 * Konstruktor der createWindow aufruft
+	 * @param primaryStage
+	 */
 	public Login(Stage primaryStage) {
-		Fenster(primaryStage);
+		createWindow(primaryStage);
 	}
 }

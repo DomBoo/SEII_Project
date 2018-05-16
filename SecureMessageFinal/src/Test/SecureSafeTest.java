@@ -8,13 +8,7 @@ import org.junit.Test;
 import Main.Login;
 import javafx.stage.Stage;
 
-public class SecureSafeTest {
-
-//	@Before
-//	public void createWindow() {
-//		
-//	}
-	
+public class SecureSafeTest {	
 	@Test
 	public void UserEingabeTest() {
 		

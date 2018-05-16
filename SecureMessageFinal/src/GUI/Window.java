@@ -10,18 +10,41 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Klasse zum Erstellen von Hilfsfenstern, Fehlerfenstern und Infofenstern
+ * 
+ * @author AllSafe
+ *
+ */
+
 public class Window {
-	public Window(Stage pStage,String text,String title) {
+	
+	/**
+	 * Konstruktor zum erstellen von Fenstern
+	 * 
+	 * Der OK-Button dient zum schlieﬂen des Fensters
+	 * 
+	 * @param primaryStage Stage-Objekt des Hauptprogramms
+	 * @param text Inhalt des Fensters
+	 * @param title Titel des Fensters
+	 */
+	public Window(Stage primaryStage,String text,String title) {
+		/**
+		 * Oberflaechenelemente der Benutzeroberflaeche
+		 */
 		Label lab = new Label(text);
-		Button ok = new Button("OK");
+		Button okButton = new Button("OK");
 		
+		/**
+		 * Layout der Benutzeroberflaeche
+		 */
 		GridPane frame = new GridPane();
 		
 		frame.setAlignment(Pos.CENTER);
 		frame.setHgap(20);
 		frame.setVgap(20);
 		frame.add(lab, 0, 0);
-		frame.add(ok,1,1);
+		frame.add(okButton,1,1);
 		
 		Scene scene = new Scene(frame,600,100);
 		
@@ -29,10 +52,10 @@ public class Window {
 		newWindow.setTitle(title);
 		newWindow.setScene(scene);
 		
-		newWindow.setX(pStage.getX()+100);
-		newWindow.setY(pStage.getY()+200);
+		newWindow.setX(primaryStage.getX()+100);
+		newWindow.setY(primaryStage.getY()+200);
 		
-		ok.setOnAction(new EventHandler<ActionEvent>() {
+		okButton.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
 			public void handle(ActionEvent event) {

@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-import Main.Empfänger;
+import Main.Empfaenger;
 import Main.Message;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,7 +17,18 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+/**
+ * Hauptfensterklasse zum navigieren auf der Benutzeroberflaeche
+ * 
+ * @author AllSafe
+ *
+ */
+
 public class MainFrame {
+	
+	/**
+	 * Oberflaechenelemente der Benutzeroberflaeche
+	 */
 	private TextArea encryptField = new TextArea();
 	private TextArea decryptField = new TextArea();
 	private Button encrypt = new Button("Encrypt");
@@ -27,13 +38,27 @@ public class MainFrame {
 	private Button help = new Button("?");
 	private Button about = new Button("About");
 	private ComboBox<String> user = new ComboBox<String>();
+	
+	/**
+	 * Layout der Benutzeroberflaeche
+	 */
 	private GridPane grid = new GridPane();
 	private VBox vBox = new VBox();
 	private Scene scene = new Scene(grid, 800, 600);
 	
+	/**
+	 * Speichern der entschluesselten - und verschluesselten Nachricht
+	 */
 	private Message msg = new Message("");
 	
-	public void Fenster(Stage primaryStage) {
+	/**
+	 * Erstellt das Hauptfenster
+	 * 
+	 * 
+	 * 
+	 * @param primaryStage Ein Stage-Objekt welches das Hauptprogramm darstellt
+	 */
+	public void createWindow(Stage primaryStage) {
 		primaryStage.setTitle("Encrypt your Message");
 		
 		encryptField.setMaxHeight(200);
@@ -52,7 +77,7 @@ public class MainFrame {
 		about.setMaxWidth(100);
 		setComboBox(user);
 		user.setMaxWidth(100);
-		user.setPromptText("     User");
+		user.setPromptText("User");
 		
 		vBox.setSpacing(50);
 		vBox.setTranslateY(60);
@@ -81,10 +106,10 @@ public class MainFrame {
 			@Override
 			public void handle(ActionEvent e) {
 				try {
-					if(Empfänger.getEmpfänger() == "") {
-						new Window(primaryStage,"Keinen User ausgewählt","Fehler");
+					if(Empfaenger.getEmpfaenger() == "") {
+						new Window(primaryStage,"Keinen User ausgewaehlt","Fehler");
 					}else {
-						new KeyFrame(primaryStage,Empfänger.getEmpfänger());
+						new KeyFrame(primaryStage,Empfaenger.getEmpfaenger());
 					}
 				} catch (Exception e1) {
 					e1.printStackTrace();
@@ -95,8 +120,8 @@ public class MainFrame {
 		user.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				Empfänger.setEmpfänger(user.getSelectionModel().getSelectedItem().toString());
-				System.out.println(Empfänger.getEmpfänger());
+				Empfaenger.setEmpfaenger(user.getSelectionModel().getSelectedItem().toString());
+				System.out.println(Empfaenger.getEmpfaenger());
 			}
 		});
 				
@@ -124,14 +149,14 @@ public class MainFrame {
 		encrypt.setOnAction(new EventHandler<ActionEvent>() {					
 			@Override
 			public void handle(ActionEvent e) {
-				if(Empfänger.getEmpfänger() == "") {
-					new Window(primaryStage,"Keinen User ausgewählt","Fehler");
+				if(Empfaenger.getEmpfaenger() == "") {
+					new Window(primaryStage,"Keinen User ausgewaehlt","Fehler");
 				}else {
 					if(encryptField.getLength() < 10000) {
 						msg.setText(encryptField.getText());
-						new EncryptFrame(primaryStage,msg.getText(),decryptField,Empfänger.getEmpfänger());
+						new EncryptFrame(primaryStage,msg.getText(),decryptField,Empfaenger.getEmpfaenger());
 					}else {
-						new Window(primaryStage, "Nicht mehr als 10000 Zeichen einfügen", "Fehler");
+						new Window(primaryStage, "Nicht mehr als 10000 Zeichen einfuegen", "Fehler");
 					}
 				}
 			}
@@ -140,14 +165,14 @@ public class MainFrame {
 		decrypt.setOnAction(new EventHandler<ActionEvent>() {					
 			@Override
 			public void handle(ActionEvent e) {
-				if(Empfänger.getEmpfänger() == "") {
-					new Window(primaryStage,"Keinen User ausgewählt","Fehler");
+				if(Empfaenger.getEmpfaenger() == "") {
+					new Window(primaryStage,"Keinen User ausgewaehlt","Fehler");
 				}else {
 					if(encryptField.getLength() < 10000) {
 						msg.setEncryptedText(encryptField.getText());
-						new DecryptFrame(primaryStage,msg.getEncryptedText(),decryptField,Empfänger.getEmpfänger());
+						new DecryptFrame(primaryStage,msg.getEncryptedText(),decryptField,Empfaenger.getEmpfaenger());
 					}else {
-						new Window(primaryStage, "Nicht mehr als 10000 Zeichen einfügen", "Fehler");
+						new Window(primaryStage, "Nicht mehr als 10000 Zeichen einfuegen", "Fehler");
 					}
 				}
 			}
@@ -160,6 +185,13 @@ public class MainFrame {
 		primaryStage.show();
 	}
 	
+	/**
+	 * Fuellt eine ComboBox mit Daten auf
+	 * 
+	 * Die Methode sucht in der Datei user.txt Zeilenweise nach den Usern und stellt sie in der Combobox da
+	 * 
+	 * @param cB ComboBox die gefuellt werden soll
+	 */
 	public void setComboBox(ComboBox<String> cB) {
 		File f = new File("C:\\Users\\Dominic\\Desktop\\SEII_Project\\SE\\src\\Main\\user.txt");
 		
@@ -178,7 +210,7 @@ public class MainFrame {
 	}
 	
 	public MainFrame(Stage primaryStage) {				
-		Fenster(primaryStage);
+		createWindow(primaryStage);
 	}
 	
 	

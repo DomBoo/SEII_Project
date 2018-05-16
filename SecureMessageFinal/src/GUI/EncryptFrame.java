@@ -3,7 +3,7 @@ package GUI;
 import javax.crypto.spec.SecretKeySpec;
 
 import Main.Message;
-import Verschlüsselung.Key;
+import Verschluesselung.Key;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -12,18 +12,40 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Stellt die Benutzeroberflaeche zum Verschluesseln der Nachricht zur Verfuegung
+ * 
+ * @author AllSafe
+ */
 public class EncryptFrame extends Message {
-	
-	private Label lab = new Label("Schlüssel eingeben");
+	/**
+	 * Oberflaechenelemente der Benutzeroberfaeche
+	 */
+	private Label lab = new Label("Schluessel eingeben");
 	private TextField tf = new TextField();
 	private Button ok = new Button("OK");
 	
-	private GridPane frame = new GridPane();
 	
+	/**
+	 * Layout der Benutzeroberflaeche
+	 */
+	private GridPane frame = new GridPane();
 	Scene scene = new Scene(frame,350,40);
 	Stage newWindow = new Stage();
 	
-	public void Fenster(Stage primaryStage,String msg,TextArea decryptField,String empf) {
+	/**
+	 * Erstellt das Fenster zum Eingeben des Keys, der benoetigt wird um die Nachricht zu verschluesseln
+	 * 
+	 * Der OK-Button ist mit einem Event versehen, welches die Methode encryptMessage aufruft
+	 * Das Fenster ist modal und die Groeße ist nicht aenderbar, um eine Usereingabe zu gewaehrleisten.
+	 * 
+	 * @param primaryStage Ein Stage-Objekt welches das Hauptprogrammfenster darstellt
+	 * @param msg Text der verschluesselt werden soll
+	 * @param OutputField Textfeld in dem der verschluesselte Text dargestellt werden soll
+	 * @param empf Empfaenger an den die Nachricht gesendet werden soll
+	 */
+	
+	public void createWindow(Stage primaryStage,String msg,TextArea OutputField,String empf) {
 		frame.setHgap(20);
 		frame.add(lab, 0, 0);
 		frame.add(tf,1,0);
@@ -40,7 +62,7 @@ public class EncryptFrame extends Message {
 			@Override
 			public void handle(ActionEvent event) {
 				
-				Nachrichtverschlüsseln(primaryStage, msg,decryptField, empf);
+				encryptMessage(primaryStage, msg,OutputField, empf);
 				
 				newWindow.close();
 			}
@@ -52,7 +74,18 @@ public class EncryptFrame extends Message {
 		newWindow.show();
 	}
 	
-	public void Nachrichtverschlüsseln(Stage primaryStage,String msg,TextArea decryptField,String empf) {
+	/**
+	 * Verschluesselt die Nachricht und schreibt die verschluesselte Nachricht in das Outputfeld
+	 * 
+	 * Es wird der passende Key aus der Datei keys aus dem Ordner keys geladen. Danach kann die Datei verschluesselt werden
+	 * 
+	 * @param primaryStage Ein Stage-Objekt welches das Hauptprogrammfenster darstellt
+	 * @param msg Text der verschluesselt werden soll
+	 * @param OutputField Textfeld in dem der verschluesselte Text dargestellt werden soll
+	 * @param empf Empfaenger an den die Nachricht gesendet werden soll
+	 */
+	
+	public void encryptMessage(Stage primaryStage,String msg,TextArea OutputField,String empf) {
 
 		//String msg = encryptField.getText();
 		String msgver = null;
@@ -69,7 +102,7 @@ public class EncryptFrame extends Message {
 		
 		try {
 			msgver = Key.encrypt(msg, key);
-			decryptField.setText(msgver);
+			OutputField.setText(msgver);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -77,8 +110,17 @@ public class EncryptFrame extends Message {
 		Key.saveKey(empf,key);
 	}
 	
-	public EncryptFrame(Stage primaryStage,String msg,TextArea decryptField,String empf) {
-		Fenster(primaryStage,msg,decryptField,empf);	
+	/**
+	 * Konstruktor der die createWindow Methode aufruft
+	 * 
+	 * @param primaryStage Ein Stage-Objekt welches das Hauptprogrammfenster darstellt
+	 * @param msg Text der verschluesselt werden soll
+	 * @param OutputField Textfeld in dem der verschluesselte Text erscheinen soll
+	 * @param empf Empfaenger an den die Nachricht gesendet werden soll
+	 */
+	
+	public EncryptFrame(Stage primaryStage,String msg,TextArea OutputField,String empf) {
+		createWindow(primaryStage,msg,OutputField,empf);	
 	}
 	
 	

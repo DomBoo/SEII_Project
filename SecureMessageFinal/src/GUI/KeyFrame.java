@@ -1,8 +1,7 @@
 package GUI;
 
-import Main.Empfänger;
-import Main.User;
-import Verschlüsselung.Key;
+import Main.Empfaenger;
+import Verschluesselung.Key;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -13,14 +12,34 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class KeyFrame extends Empfänger{
-	Label lab = new Label("Your PublicKey ... -> "+Key.getKey(Key.importKey(getEmpfänger())));
+/**
+ * Klasse zum Anzeigen des Keys
+ * 
+ * @author AllSafe
+ *
+ */
+
+public class KeyFrame extends Empfaenger{
+	/**
+	 * Oberflaechenelemente der Benutzeroberflaeche
+	 */
+	Label lab = new Label("Your PublicKey ... -> "+Key.getKey(Key.importKey(getEmpfaenger())));
 	Button ok = new Button("OK");
+	
+	/**
+	 * Layout der Benutzeroberflaeche
+	 */
 	GridPane frame = new GridPane();
 	Scene scene = new Scene(frame,600,100);
 	Stage newWindow = new Stage();
 	
-	public void Fenster(Stage primaryStage) {
+	/**
+	 * Erstellt das Fenster zum Eingeben des Keys um den Text zu entschluesseln
+	 * 
+	 * @param primaryStage Ein Stage-Objekt welches das Hauptprogrammfenster darstellt
+	 */
+	
+	public void createWindow(Stage primaryStage) {
 		frame.setAlignment(Pos.CENTER);
 		frame.setHgap(20);
 		frame.setVgap(20);
@@ -48,6 +67,6 @@ public class KeyFrame extends Empfänger{
 	}
 	
 	public KeyFrame(Stage primaryStage,String name) throws Exception {
-		Fenster(primaryStage);
+		createWindow(primaryStage);
 	}
 }

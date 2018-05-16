@@ -19,9 +19,9 @@ public class Main extends Application{
 	}
 
 	/**
-	 * Öffnet das Login Fenster, damit der User sich anmelden kann 
+	 * oeffnet das Login Fenster, damit der User sich anmelden kann 
 	 * 
-	 * Die start Methode bekommt ein Stage-Objekt <em>primaryStage</em> übergeben, welches für das als Oberflächenfenster für das Programm dient
+	 * Die start Methode bekommt ein Stage-Objekt <em>primaryStage</em> uebergeben, welches fuer das als Oberflaechenfenster fuer das Programm dient
 	 * 
 	 * @see Login
 	 */

@@ -18,4 +18,5 @@
 <fullyQualifiedTypeName name="Main.User"/>
 <fullyQualifiedTypeName name="Main.Empfänger"/>
 <fullyQualifiedTypeName name="Main.Message"/>
+<fullyQualifiedTypeName name="GUI.DecryptFrame"/>
 </qualifiedTypeNameHistroy>
