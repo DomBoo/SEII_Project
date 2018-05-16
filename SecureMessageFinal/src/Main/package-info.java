@@ -1,7 +1,7 @@
 /**
- * Stellt die Klassen für den Login und die Main zum Starten des Programms zur Verfuegung.
+ * Stellt die Klassen fuer den Login und die Main zum Starten des Programms zur Verfuegung.
  *
- * Enthaelt des Weiteren im Ordner die Dateien password.txt und user.txt, die unabdinglich für das Login-System sind.
+ * Enthaelt des Weiteren im Ordner die Dateien password.txt und user.txt, die unabdinglich fï¿½r das Login-System sind.
  *
  * @since 1.0
  */

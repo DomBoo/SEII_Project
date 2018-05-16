@@ -1,4 +1,4 @@
-package Verschlüsselung;
+package Verschluesselung;
 
 import java.security.MessageDigest;
 import java.util.Arrays;

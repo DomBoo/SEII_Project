@@ -37,7 +37,7 @@ public class EncryptFrame extends Message {
 	 * Erstellt das Fenster zum Eingeben des Keys, der benoetigt wird um die Nachricht zu verschluesseln
 	 * 
 	 * Der OK-Button ist mit einem Event versehen, welches die Methode encryptMessage aufruft
-	 * Das Fenster ist modal und die Groeﬂe ist nicht aenderbar, um eine Usereingabe zu gewaehrleisten.
+	 * Das Fenster ist modal und die Groesse ist nicht aenderbar, um eine Usereingabe zu gewaehrleisten.
 	 * 
 	 * @param primaryStage Ein Stage-Objekt welches das Hauptprogrammfenster darstellt
 	 * @param msg Text der verschluesselt werden soll
