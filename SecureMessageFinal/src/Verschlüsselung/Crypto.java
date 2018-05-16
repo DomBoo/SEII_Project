@@ -40,13 +40,37 @@ public class Crypto {
 		return Base64.getEncoder().encodeToString(key.getEncoded());
 	}
 	
-	public static void saveKey(String name, SecretKeySpec key) {
+	public static void saveKey(String name, SecretKeySpec key) throws Exception {
 		File dir = new File("keys/keys");
+		Scanner scan = new Scanner(dir);
 		
 		try { 
 			FileWriter fos = new FileWriter("keys/keys", true);
 			BufferedWriter bf = new BufferedWriter(fos);
 			PrintWriter pw = new PrintWriter(bf);
+			BufferedReader file = new BufferedReader(new FileReader("keys/keys"));
+			while(scan.hasNext()) {
+				String line = scan.nextLine().toString();
+				if (line.contains(name))
+				{
+					String tmp = "";
+					String line1;
+					while((line1 = file.readLine()) != null)
+					{
+						tmp = tmp + line1 + "\n";
+					}
+					tmp = tmp.substring(0, tmp.length()-1);
+					System.out.println(tmp);
+					tmp = tmp.replace(name + "#" + Crypto.getKey(Crypto.importKey(name)), name + "#" + Base64.getEncoder().encodeToString(key.getEncoded()));
+					FileOutputStream fileOut = new FileOutputStream("keys/keys");
+					fileOut.write(tmp.getBytes());
+					fileOut.close();
+					return;
+				}
+			}
+			
+			file.close();
+			scan.close();
 			pw.println(name + "#" + Base64.getEncoder().encodeToString(key.getEncoded()));
 			pw.close();	
 			}
@@ -84,7 +108,7 @@ public class Crypto {
 	
 	public static void main(String args[]) throws Exception {
 		String msg = "Ich bin eine geheime Nachricht";
-		String keyst = "Test";
+		String keyst = "76";
 		String msgver;
 		SecretKeySpec key = Crypto.keygen(keyst);
 		
@@ -93,10 +117,10 @@ public class Crypto {
 		
 		msgver = Crypto.encrypt(msg, key);
 		System.out.println(msgver);
-		//Crypto.saveKey("Helga" , key);
+		Crypto.saveKey("Helmut" , key);
 		
 		SecretKeySpec keyim = Crypto.importKey("Helga");
 		System.out.println(Crypto.getKey(keyim));
-		System.out.println(Crypto.decrypt(msgver, keyim));
+		//System.out.println(Crypto.decrypt(msgver, keyim));
 	}
 }
