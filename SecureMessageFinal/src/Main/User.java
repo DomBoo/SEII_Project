@@ -1,15 +1,15 @@
 package Main;
-import Verschlüsselung.Key;
 
 public class User {
-	private String name;
-	private Key k;
+	protected static String name;
+	protected static String password;
 	
-	public String getName() {
+	public static String getName() {
 		return name;
 	}
 	
-	public void initKey() {
-		
+	public static void setName(String name) {
+		User.name = name;
 	}
 }
+ 
