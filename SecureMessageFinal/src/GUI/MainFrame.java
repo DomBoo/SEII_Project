@@ -1,177 +1,155 @@
 package GUI;
 
-import java.security.NoSuchAlgorithmException;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
 
-import javax.crypto.spec.SecretKeySpec;
-
-import Verschlüsselung.Key;
+import Main.Empfänger;
+import Main.Message;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.*;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class MainFrame {
+	private TextArea encryptField = new TextArea();
+	private TextArea decryptField = new TextArea();
+	private Button encrypt = new Button("Encrypt");
+	private Button decrypt = new Button("Decrypt");
+	private Button getKey = new Button("Get Key");
+	private Button showKey = new Button("Show Key");
+	private Button help = new Button("?");
+	private Button about = new Button("About");
+	private ComboBox<String> user = new ComboBox<String>();
+	private GridPane grid = new GridPane();
+	private VBox vBox = new VBox();
+	private Scene scene = new Scene(grid, 800, 600);
 	
-	public MainFrame(Stage primaryStage) {
-//		Key k = new Key();
-//		k.keyGen();
-		
-		//Titel des Fensters
+	private Message msg = new Message("");
+	
+	public void Fenster(Stage primaryStage) {
 		primaryStage.setTitle("Encrypt your Message");
 		
-		//Elemente des Hauptfensters initialisieren
-		TextArea encryptField = new TextArea();
-		TextArea decryptField = new TextArea();
+		encryptField.setMaxHeight(200);
+		encryptField.setTranslateY(-40);
 		
-		Button encrypt = new Button("Encrypt");
+		decryptField.setMaxHeight(200);
+		decryptField.setTranslateY(-100);
+		decryptField.setEditable(false);
+		
 		encrypt.setMaxWidth(100);
-		
-		Button decrypt = new Button("Decrypt");
 		decrypt.setMaxWidth(100);
-		
-		Button getKey = new Button("Get Key");
 		getKey.setMaxWidth(100);
-		
-		Button showKey = new Button("Show Key");
 		showKey.setMaxWidth(100);
 		
-		Button help = new Button("?");
-		Button about = new Button("About");
+		help.setTranslateX(50);
 		about.setMaxWidth(100);
+		setComboBox(user);
+		user.setMaxWidth(100);
+		user.setPromptText("     User");
 		
-		//Layout des Hauptfensters anlegen
-		
-		GridPane grid = new GridPane();
-		
-		//Vertikale Box mit den Buttons
-		VBox vBox = new VBox();
 		vBox.setSpacing(50);
+		vBox.setTranslateY(60);
+		vBox.setTranslateX(40);
 		
-		ObservableList list = vBox.getChildren();
-		list.addAll(encrypt,decrypt,getKey,showKey);
+		ObservableList<Node> list = vBox.getChildren();
+		list.addAll(encrypt,decrypt,getKey,user,about);
 		
-		
-		//Layoutattribute anpassen
 		grid.setAlignment(Pos.CENTER_LEFT);
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(20,20,20,20));
 		
-		grid.setMargin(vBox, new Insets(0,50,0,50));
+		GridPane.setMargin(vBox, new Insets(0,50,0,50));
 		
-		//Fenster bereit machen und in das Hauptfenster einsetzen
-		Scene scene = new Scene(grid, 800, 600);
 		primaryStage.setScene(scene);
 		
-		//CSS Datei einbinden
 		scene.getStylesheets().addAll(this.getClass().getResource("fenster.css").toExternalForm());
 		
-		//Elemente in das Layout einsetzen
 		grid.add(encryptField, 0, 1);
 		grid.add(decryptField, 0, 2);
 		grid.add(vBox, 1, 1);
-		grid.add(help, 2, 0);
-		grid.add(about, 0, 3);
-		
-		
-		//Buttonklick GetKey
-		
+		grid.add(help, 2, 0);		
+	
 		getKey.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				new KeyFrame(primaryStage);
+				try {
+					if(Empfänger.getEmpfänger() == "") {
+						new Window(primaryStage,"Keinen User ausgewählt","Fehler");
+					}else {
+						new KeyFrame(primaryStage,Empfänger.getEmpfänger());
+					}
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
-		
-		//Buttonklick KeyList
-		
-		showKey.setOnAction(new EventHandler<ActionEvent>() {
+				
+		user.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				new KeyListFrame(primaryStage);
+				Empfänger.setEmpfänger(user.getSelectionModel().getSelectedItem().toString());
+				System.out.println(Empfänger.getEmpfänger());
 			}
 		});
-		
-		//Buttonklick Help
-		
+				
 		help.setOnAction(new EventHandler<ActionEvent>() {					
 			@Override
-			public void handle(ActionEvent e) {
-				new HelpFrame(primaryStage);
+			public void handle(ActionEvent e) {			
+				if(Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
+					try {
+						Desktop.getDesktop().open(new File("C:\\Users\\Dominic\\Desktop\\SEII_Project\\SE\\src\\Main\\Readme.txt"));
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+			
 			}
 		});
-		
-		//Buttonklick Help
-		
+				
 		about.setOnAction(new EventHandler<ActionEvent>() {					
 			@Override
 			public void handle(ActionEvent e) {
-				new AboutFrame(primaryStage);
+				new Window(primaryStage,"Abouttext","About");
 			}
 		});
-		
-		//Buttoklick Encrypt
-		
+				
 		encrypt.setOnAction(new EventHandler<ActionEvent>() {					
 			@Override
 			public void handle(ActionEvent e) {
-//				k.keysEinlesen();
-//				
-//				System.out.println("PublicKey: ");
-//				System.out.println(k.getPublicKey());
-//				System.out.println("PrivateKEy: ");
-//				System.out.println(k.getPrivateKey());
-				
-				String msg = encryptField.getText();
-				String msgver = null;
-	
-				String keyst = "Extrem 1Lang dsdddfdfg";
-	
-				SecretKeySpec key = null;
-				try {
-					key = Key.keygen(keyst);
-				} catch (Exception e1) {
-					e1.printStackTrace();
+				if(Empfänger.getEmpfänger() == "") {
+					new Window(primaryStage,"Keinen User ausgewählt","Fehler");
+				}else {
+					if(encryptField.getLength() < 10000) {
+						msg.setText(encryptField.getText());
+						new EncryptFrame(primaryStage,msg.getText(),decryptField,Empfänger.getEmpfänger());
+					}else {
+						new Window(primaryStage, "Nicht mehr als 10000 Zeichen einfügen", "Fehler");
+					}
 				}
-
-				System.out.println(msg);
-				System.out.println(Key.getKey(key));
-				
-				try {
-					msgver = Key.encrypt(msg, key);
-					decryptField.setText(msgver);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				System.out.println(msgver);
-				Key.saveKey(key);
-
-				new EncryptFrame(primaryStage);
 			}
 		});
-		
-		//Buttonklick Decrypt
-		
+				
 		decrypt.setOnAction(new EventHandler<ActionEvent>() {					
 			@Override
 			public void handle(ActionEvent e) {
-				String msgver = decryptField.getText();
-				
-				SecretKeySpec keyim = Key.importKey();
-				System.out.println(Key.getKey(keyim));
-		
-				try {
-					decryptField.setText(Key.decrypt(msgver, keyim));
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				if(Empfänger.getEmpfänger() == "") {
+					new Window(primaryStage,"Keinen User ausgewählt","Fehler");
+				}else {
+					if(encryptField.getLength() < 10000) {
+						msg.setEncryptedText(encryptField.getText());
+						new DecryptFrame(primaryStage,msg.getEncryptedText(),decryptField,Empfänger.getEmpfänger());
+					}else {
+						new Window(primaryStage, "Nicht mehr als 10000 Zeichen einfügen", "Fehler");
+					}
 				}
-				
-				new DecryptFrame(primaryStage);
 			}
 		});
 		
@@ -181,4 +159,27 @@ public class MainFrame {
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
+	
+	public void setComboBox(ComboBox<String> cB) {
+		File f = new File("C:\\Users\\Dominic\\Desktop\\SEII_Project\\SE\\src\\Main\\user.txt");
+		
+		
+		try{
+			Scanner scan = new Scanner(f);
+			while(scan.hasNext()){
+				String line = scan.nextLine().toString();
+				cB.getItems().add(line);
+			}
+			scan.close();
+        }
+        catch(Exception fra){
+          System.out.println(fra);
+        }
+	}
+	
+	public MainFrame(Stage primaryStage) {				
+		Fenster(primaryStage);
+	}
+	
+	
 }
