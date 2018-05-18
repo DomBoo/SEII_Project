@@ -1,7 +1,7 @@
 package Main;
 
 /**
- * Handelt den Umgang mit den Empfaengerdaten
+ * Stellt die Klasse fuer die Empfaengerdaten dar
  * 
  * @author AllSafe
  */
@@ -10,7 +10,7 @@ public class Empfaenger {
 	/**
 	 * Name des Empfaengers
 	 */
-	protected static String empfaenger;
+	protected static String empfaenger = "";
 	/**
 	 * Key des Empfaengers
 	 */
@@ -19,7 +19,7 @@ public class Empfaenger {
 	/**
 	 * Gibt den Namen des Empfaengers zurueck
 	 * 
-	 * @return 
+	 * @return Name des Empfaengers
 	 */
 	public static String getEmpfaenger() {
 		return empfaenger;
@@ -29,7 +29,7 @@ public class Empfaenger {
 	/**
 	 * Gibt den Key des Empfaengers zurueck
 	 * 
-	 * @return
+	 * @return Key des Empfaengers
 	 */
 	public static String getEmpfaengerKey() {
 		return empfaengerKey;
@@ -44,3 +44,4 @@ public class Empfaenger {
 		Empfaenger.empfaenger = empfaenger;
 	}
 }
+

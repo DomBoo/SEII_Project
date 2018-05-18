@@ -1,7 +1,8 @@
 package Main;
 
 /**
- * Handelt den Umgang mit den Nachrichtendaten
+ *  In der Klasse Message werden die Klartext Nachricht und die verschluesselte Nachricht, sowie 
+ *  Methoden zum Umgang mit den Nachrichten, bereitgestellt.
  * 
  * @author AllSafe
  */
@@ -19,17 +20,25 @@ public class Message {
 	 */
 	private int length;
 	
+	/**
+	 * Initialisiert die Nachricht mit ""
+	 */
 	public Message() {
 		this("");
 	}
 	
+	/**
+	 * Initialisiert die Nachricht mit dem Parameter msg
+	 * 
+	 * @param msg Klartext Nachricht 
+	 */
 	public Message(String msg) {
 		this.msg = msg;
 	}
 	
 	/**
 	 * Setzt die Nachricht
-	 * @param text
+	 * @param text Klartext Nachricht
 	 */
 	public void setText(String text) {
 		msg = text;
@@ -37,7 +46,7 @@ public class Message {
 	
 	/**
 	 * Gibt die Nachricht zurueck
-	 * @return
+	 * @return Klartext Nachricht
 	 */
 	public String getText() {
 		return msg;
@@ -45,7 +54,7 @@ public class Message {
 	
 	/**
 	 * Setzt die verschluesselte Nachricht
-	 * @param text
+	 * @param text verschluesselte Nachricht
 	 */
 	public void setEncryptedText(String text) {
 		encryptedMsg = text;
@@ -53,7 +62,7 @@ public class Message {
 	
 	/**
 	 * Gibt die verschluesselte Nachricht zurueck
-	 * @return
+	 * @return verschluesselte Nachricht
 	 */
 	public String getEncryptedText() {
 		return encryptedMsg;
@@ -61,7 +70,7 @@ public class Message {
 	
 	/**
 	 * Gibt die Laenge der Nachricht zurueck
-	 * @return
+	 * @return Laenge der eingegebenen Nachricht
 	 */
 	public int getLength() {
 		return length;

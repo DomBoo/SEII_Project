@@ -1,7 +1,7 @@
 package Main;
 
 /**
- * Handelt den Umgang mit den Userdaten
+ * Stellt die Klasse fuer die Benutzerdaten dar
  * 
  * @author AllSafe
  */
@@ -17,14 +17,14 @@ public class User {
 	
 	/**
 	 * Gibt den Namen des Users zurueck
-	 * @return
+	 * @return Name des Users
 	 */
 	public static String getName() {
 		return name;
 	}
 	
 	/**
-	 * setzt den Namen des Users
+	 * Setzt den Namen des Users
 	 * @param name Name des Users
 	 */
 	public static void setName(String name) {

@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 public class Login extends User{
 	
 	/**
-	 * Elemente des Fensters
+	 * Oberflaechenelemente der Benutzeroberflaeche
 	 */
 	private Label nameLab = new Label("User");
 	private Label passwordLab = new Label("Password");
@@ -23,18 +23,20 @@ public class Login extends User{
 	private Button okButton = new Button("OK");	
 	
 	/**
-	 * Layout des Fensters
+	 * Layout der Benutzeroberflaeche
 	 */
 	private GridPane grid = new GridPane();
 	private Scene scene = new Scene(grid, 300, 200);
 
 	/**
-	 * Erstellt das Fenster
+	 * Erstellt das Fenster zum Login des Benutzers, um den User nach Benutzername und Passwort zu fragen
 	 * 
-	 * @param primaryStage
+	 * Wenn der User auf den OK Button klickt oder Enter drueckt, springt das Programm zur Log Methode, in welcher die Login Daten des Users ueberprueft werden.
+	 * 
+	 * @param primaryStage Umgebung des Hauptprogramms
 	 */
 	public void createWindow(Stage primaryStage) {
-		primaryStage.setTitle("Encrypt your Message");		
+		primaryStage.setTitle("Login");		
 				
 		grid.setAlignment(Pos.CENTER);
 		grid.setHgap(10);
@@ -71,9 +73,11 @@ public class Login extends User{
 	}
 	
 	/**
-	 * Fragt den User nach Usernamen und Passwort
+	 * Ueberprueft ob der User valide Daten eingegeben hat
 	 * 
-	 * @param primaryStage
+	 * Es wird zuerst in der Datei user.txt nach einem User gesucht, um dann in der password.txt das passende Passwort zum User zu finden und mit der Eingabe zu vergleichen.
+	 * 
+	 * @param primaryStage Umgebung des Hauptprogramms
 	 */
 	public void Log(Stage primaryStage) {
 		String dir = System.getProperty("user.dir");
@@ -99,9 +103,6 @@ public class Login extends User{
                 }
             }
             
-            UserBuffer.close();
-            PasswordBuffer.close();
-            
         } catch (Exception e1) {
            e1.printStackTrace();
         }
@@ -115,7 +116,7 @@ public class Login extends User{
 	
 	/**
 	 * Konstruktor der createWindow aufruft
-	 * @param primaryStage
+	 * @param primaryStage Umgebung des Hauptprogramms
 	 */
 	public Login(Stage primaryStage) {
 		createWindow(primaryStage);

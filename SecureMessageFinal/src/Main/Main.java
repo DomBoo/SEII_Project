@@ -1,5 +1,6 @@
 package Main;
 
+import GUI.MainFrame;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -19,10 +20,11 @@ public class Main extends Application{
 	}
 
 	/**
-	 * oeffnet das Login Fenster, damit der User sich anmelden kann 
+	 * Oeffnet das Login Fenster, damit der User sich anmelden kann 
 	 * 
-	 * Die start Methode bekommt ein Stage-Objekt <em>primaryStage</em> uebergeben, welches fuer das als Oberflaechenfenster fuer das Programm dient
+	 * Die start Methode bekommt ein Stage-Objekt <em>primaryStage</em> uebergeben, welches als Umgebung fuer das Programm dient
 	 * 
+	 * @param primaryStage Umgebung des Hauptprogramms
 	 * @see Login
 	 */
 	

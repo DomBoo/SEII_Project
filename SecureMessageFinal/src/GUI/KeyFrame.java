@@ -1,7 +1,9 @@
 package GUI;
 
+import java.io.File;
+import java.util.Scanner;
+
 import Main.Empfaenger;
-import Verschluesselung.Key;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -13,7 +15,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * Klasse zum Anzeigen des Keys
+ * Klasse zum Anzeigen des Klar-Keys
  * 
  * @author AllSafe
  *
@@ -23,7 +25,7 @@ public class KeyFrame extends Empfaenger{
 	/**
 	 * Oberflaechenelemente der Benutzeroberflaeche
 	 */
-	Label lab = new Label("Your PublicKey ... -> "+Key.getKey(Key.importKey(getEmpfaenger())));
+	Label lab = new Label("Your PublicKey ... -> "+getClearKey(getEmpfaenger()));
 	Button ok = new Button("OK");
 	
 	/**
@@ -64,6 +66,35 @@ public class KeyFrame extends Empfaenger{
 		
 		newWindow.setResizable(false);
 		newWindow.show();
+	}
+	
+	/**
+	 * Zeigt den Key an, den der Nutzer fuer das entschluesseln bzw. das verschluesseln benutzen muss
+	 * 
+	 * @param name Name des Empfaengers
+	 * @return Key als Klartext zur Keyeingabe
+	 * @throws Exception
+	 */
+	
+	public String getClearKey(String name) throws Exception {
+		File f = new File("keys/clearKeys.txt");
+		Scanner scan = new Scanner(f);
+		String key = null;
+
+		try{
+          while(scan.hasNext()){
+              String line = scan.nextLine().toString();
+              if(line.contains(name)){
+            	  key = line;
+              }
+         }
+        key = key.substring(key.indexOf("#")+1, key.length());
+        scan.close();
+        }
+        catch(Exception fra){
+          System.out.println(fra);
+        }
+        return key;
 	}
 	
 	public KeyFrame(Stage primaryStage,String name) throws Exception {

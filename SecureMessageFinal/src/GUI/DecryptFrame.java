@@ -1,5 +1,8 @@
 package GUI;
 
+import java.io.File;
+import java.util.Scanner;
+
 import javax.crypto.spec.SecretKeySpec;
 
 import Main.Message;
@@ -38,6 +41,7 @@ public class DecryptFrame extends Message{
 	 * Erstellt das Fenster zum Eingeben des Keys, der benoetigt wird um die Nachricht zu entschluesseln
 	 * 
 	 * Der OK-Button ist mit einem Event versehen, welches die Methode decryptMessage aufruft
+	 * Wenn der User einen falschen Key eingibt, oeffnet sich ein Fehlerfenster
 	 * Das Fenster ist modal und die Groeﬂe ist nicht aenderbar, um eine Usereingabe zu gewaehrleisten.
 	 * 
 	 * @param primaryStage Ein Stage-Objekt welches das Hauptprogrammfenster darstellt
@@ -62,8 +66,15 @@ public class DecryptFrame extends Message{
 			
 			@Override
 			public void handle(ActionEvent event) {
-				decryptMessage(primaryStage, msg, OutputField, empf);
-				
+				try {
+					if(tf.getText().equals(getClearKey(empf))) {
+						decryptMessage(primaryStage, msg, OutputField, empf);
+					}else {
+						new Window(primaryStage, "Falscher Key","Fehler");
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}				
 				newWindow.close();
 			}
 		});
@@ -93,6 +104,37 @@ public class DecryptFrame extends Message{
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Dient zum holen des Keys aus der clearKeys.txt Datei
+	 * 
+	 * Die Methode sucht nach dem uebergegebenen Empfaaenger und gibt dann den Key passenden Key zurueck
+	 * 
+	 * @param name Name des Empfaengers
+	 * @return Key als Klartext zur Keyeingabe
+	 * @throws Exception
+	 */
+	
+	public String getClearKey(String name) throws Exception {
+		File f = new File("keys/clearKeys.txt");
+		Scanner scan = new Scanner(f);
+		String key = null;
+
+		try{
+          while(scan.hasNext()){
+              String line = scan.nextLine().toString();
+              if(line.contains(name)){
+            	  key = line;
+              }
+         }
+        key = key.substring(key.indexOf("#")+1, key.length());
+        scan.close();
+        }
+        catch(Exception fra){
+          System.out.println(fra);
+        }
+        return key;
 	}
 	
 	/**

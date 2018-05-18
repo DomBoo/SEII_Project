@@ -190,5 +190,88 @@ Tel: 030 / 4478-53
 Mail: fjessner@allsafe.com
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Datenkonfigurierung
+\end_layout
+
+\begin_layout Subsection
+Eingabe neuer Nutzer
+\end_layout
+
+\begin_layout Standard
+Alle Nutzer befinden sich in der user.txt Datei im Hauptordner des Programms.
+ Jeder Nutzer befindet sich in einer seperaten Zeile.
+ Um nun einen neuen Nutzer anzulegen, navigieren Sie den Cursor in eine
+ neue Zeile und geben den Nutzernamen ein.
+ Beachten Sie, dass zwischen den Nutzernamen keine Leerzeilen entstehen.
+ Leerzeilen sorgen für einen Fehler im Loginbereich.
+\end_layout
+
+\begin_layout Subsection
+Anlegen der Login Passwörter
+\end_layout
+
+\begin_layout Standard
+Die Passwörter für den Loginbereich befinden sich in der password.txt Datei
+ im Hauptordner des Programms.
+ Wie auch die Nutzer, befindet sich jedes Passwort in einer seperaten Zeile.
+ Um ein neues Passwort anzulegen, navigieren Sie den Cursor in eine neue
+ Zeile und geben das Passwort ein.
+ Beachten Sie auch hier, dass zwischen den Nutzernamen keine Leerzeilen
+ entstehen, da dies den Login behindert.
+ Des Weiteren ist zu beachten, dass der Nutzer und das zugehörige Passwort
+ in der selben Zeile stehen.
+ Beispiel: Wenn Nutzer 
+\begin_inset Quotes eld
+\end_inset
+
+Max Meier
+\begin_inset Quotes erd
+\end_inset
+
+ in Zeile 8 (user,txt) steht, muss sein Passwort 
+\begin_inset Quotes eld
+\end_inset
+
+pass1234
+\begin_inset Quotes erd
+\end_inset
+
+ auch in Zeile 8 (password.txt) stehen.
+\end_layout
+
+\begin_layout Subsection
+Anlegen eines Keys
+\end_layout
+
+\begin_layout Standard
+Die Schlüssel für die Nachrichtenver- und entschlüsselung befinden sich
+ in der clearKeys.txt Datei (als Klartext Key).und in der keys Datei (als
+ verschlüsselter Key) im Ordner Keys.
+ Die Klarkeys stehen in seperaten Zeilen je Key.
+ Wenn Sie einen neuen Klarkey anlegen oder verändern, müssen Sie auch den
+ verschlüsselten Key ändern.
+ EInen verschlüsselten Key ändern Sie, indem SIe zuerst in der encryptFrame.java
+ die Bedingung der richtigen Keyeingabe auskommentieren.
+ Nun können Sie das Programm starten und über den Encrypt Button die neuen
+ verschlüsselten Keys anlegen bzw.
+ den alten Key überschreiben ohne, dass der Fehler 
+\begin_inset Quotes eld
+\end_inset
+
+FalscherKey
+\begin_inset Quotes erd
+\end_inset
+
+ auftritt.
+\end_layout
+
 \end_body
 \end_document

@@ -20,9 +20,9 @@ import javafx.stage.Stage;
 public class Window {
 	
 	/**
-	 * Konstruktor zum erstellen von Fenstern
+	 * Konstruktor zum Erstellen von Fenstern
 	 * 
-	 * Der OK-Button dient zum schlieﬂen des Fensters
+	 * Der OK-Button dient zum Schlieﬂen des Fensters
 	 * 
 	 * @param primaryStage Stage-Objekt des Hauptprogramms
 	 * @param text Inhalt des Fensters

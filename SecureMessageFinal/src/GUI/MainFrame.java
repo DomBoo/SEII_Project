@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -29,21 +30,22 @@ public class MainFrame {
 	/**
 	 * Oberflaechenelemente der Benutzeroberflaeche
 	 */
-	private TextArea encryptField = new TextArea();
-	private TextArea decryptField = new TextArea();
+	private TextArea InputField = new TextArea();
+	private TextArea OutputField = new TextArea();
 	private Button encrypt = new Button("Encrypt");
 	private Button decrypt = new Button("Decrypt");
-	private Button getKey = new Button("Get Key");
+	private Button getKey = new Button("Import Key");
 	private Button showKey = new Button("Show Key");
 	private Button help = new Button("?");
 	private Button about = new Button("About");
 	private ComboBox<String> user = new ComboBox<String>();
+	private Label copyright = new Label("\u00a9 AllSafe 2018 all rights reserved");
 	
 	/**
 	 * Layout der Benutzeroberflaeche
 	 */
 	private GridPane grid = new GridPane();
-	private VBox vBox = new VBox();
+	private VBox buttonBox = new VBox();
 	private Scene scene = new Scene(grid, 800, 600);
 	
 	/**
@@ -54,19 +56,22 @@ public class MainFrame {
 	/**
 	 * Erstellt das Hauptfenster
 	 * 
-	 * 
+	 * Die Buttons verhalten sich bei einem Klick entsprechend ihres Aufgabenbereiches 
+	 * Die ComboBox enthaelt alle User die in der Datei user.txt vorhanden sind
 	 * 
 	 * @param primaryStage Ein Stage-Objekt welches das Hauptprogramm darstellt
 	 */
 	public void createWindow(Stage primaryStage) {
 		primaryStage.setTitle("Encrypt your Message");
 		
-		encryptField.setMaxHeight(200);
-		encryptField.setTranslateY(-40);
+		InputField.setMaxHeight(200);
+		InputField.setTranslateY(-20);
+		InputField.setTranslateX(40);
 		
-		decryptField.setMaxHeight(200);
-		decryptField.setTranslateY(-100);
-		decryptField.setEditable(false);
+		OutputField.setMaxHeight(200);
+		OutputField.setTranslateY(-70);
+		OutputField.setEditable(false);
+		OutputField.setTranslateX(40);
 		
 		encrypt.setMaxWidth(100);
 		decrypt.setMaxWidth(100);
@@ -74,33 +79,37 @@ public class MainFrame {
 		showKey.setMaxWidth(100);
 		
 		help.setTranslateX(50);
+		help.setTranslateY(40);
 		about.setMaxWidth(100);
 		setComboBox(user);
 		user.setMaxWidth(100);
 		user.setPromptText("User");
 		
-		vBox.setSpacing(50);
-		vBox.setTranslateY(60);
-		vBox.setTranslateX(40);
+		buttonBox.setSpacing(50);
+		buttonBox.setTranslateY(80);
+		buttonBox.setTranslateX(40);
 		
-		ObservableList<Node> list = vBox.getChildren();
+		ObservableList<Node> list = buttonBox.getChildren();
 		list.addAll(encrypt,decrypt,getKey,user,about);
+		
+		copyright.setFont(new Font("Arial", 30));
 		
 		grid.setAlignment(Pos.CENTER_LEFT);
 		grid.setHgap(10);
 		grid.setVgap(10);
-		grid.setPadding(new Insets(20,20,20,20));
+		grid.setPadding(new Insets(0,20,5,20));
 		
-		GridPane.setMargin(vBox, new Insets(0,50,0,50));
+		GridPane.setMargin(buttonBox, new Insets(0,50,0,50));
 		
 		primaryStage.setScene(scene);
 		
 		scene.getStylesheets().addAll(this.getClass().getResource("fenster.css").toExternalForm());
 		
-		grid.add(encryptField, 0, 1);
-		grid.add(decryptField, 0, 2);
-		grid.add(vBox, 1, 1);
-		grid.add(help, 2, 0);		
+		grid.add(InputField, 0, 1);
+		grid.add(OutputField, 0, 2);
+		grid.add(buttonBox, 1, 1);
+		grid.add(help, 2, 0);
+		grid.add(copyright, 0, 3);
 	
 		getKey.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -121,7 +130,6 @@ public class MainFrame {
 			@Override
 			public void handle(ActionEvent e) {
 				Empfaenger.setEmpfaenger(user.getSelectionModel().getSelectedItem().toString());
-				System.out.println(Empfaenger.getEmpfaenger());
 			}
 		});
 				
@@ -130,19 +138,27 @@ public class MainFrame {
 			public void handle(ActionEvent e) {			
 				if(Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
 					try {
-						Desktop.getDesktop().open(new File("C:\\Users\\Dominic\\Desktop\\SEII_Project\\SE\\src\\Main\\Readme.txt"));
+						String dir = System.getProperty("user.dir");
+						
+						Desktop.getDesktop().open(new File(dir+"/Documentation/Anwenderdokumentation.pdf"));
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
 				}
-			
 			}
 		});
 				
 		about.setOnAction(new EventHandler<ActionEvent>() {					
 			@Override
-			public void handle(ActionEvent e) {
-				new Window(primaryStage,"Abouttext","About");
+			public void handle(ActionEvent e) {				
+				try {
+					String dir = System.getProperty("user.dir");
+
+					Desktop.getDesktop().open(new File(dir+"/src/GUI/about.txt"));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 				
@@ -152,9 +168,9 @@ public class MainFrame {
 				if(Empfaenger.getEmpfaenger() == "") {
 					new Window(primaryStage,"Keinen User ausgewaehlt","Fehler");
 				}else {
-					if(encryptField.getLength() < 10000) {
-						msg.setText(encryptField.getText());
-						new EncryptFrame(primaryStage,msg.getText(),decryptField,Empfaenger.getEmpfaenger());
+					if(InputField.getLength() < 10000) {
+						msg.setText(InputField.getText());
+						new EncryptFrame(primaryStage,msg.getText(),OutputField,Empfaenger.getEmpfaenger());
 					}else {
 						new Window(primaryStage, "Nicht mehr als 10000 Zeichen einfuegen", "Fehler");
 					}
@@ -168,9 +184,9 @@ public class MainFrame {
 				if(Empfaenger.getEmpfaenger() == "") {
 					new Window(primaryStage,"Keinen User ausgewaehlt","Fehler");
 				}else {
-					if(encryptField.getLength() < 10000) {
-						msg.setEncryptedText(encryptField.getText());
-						new DecryptFrame(primaryStage,msg.getEncryptedText(),decryptField,Empfaenger.getEmpfaenger());
+					if(InputField.getLength() < 10000) {
+						msg.setEncryptedText(InputField.getText());
+						new DecryptFrame(primaryStage,msg.getEncryptedText(),OutputField,Empfaenger.getEmpfaenger());
 					}else {
 						new Window(primaryStage, "Nicht mehr als 10000 Zeichen einfuegen", "Fehler");
 					}
@@ -178,7 +194,7 @@ public class MainFrame {
 			}
 		});
 		
-		primaryStage.setX(primaryStage.getX()-150);
+		primaryStage.setX(primaryStage.getX()-200);
 		primaryStage.setY(primaryStage.getY()-100);
 		
 		primaryStage.setResizable(false);
@@ -188,13 +204,13 @@ public class MainFrame {
 	/**
 	 * Fuellt eine ComboBox mit Daten auf
 	 * 
-	 * Die Methode sucht in der Datei user.txt Zeilenweise nach den Usern und stellt sie in der Combobox da
+	 * Die Methode sucht in der Datei user.txt Zeilenweise nach den Usern und stellt sie in der Combobox dar
 	 * 
 	 * @param cB ComboBox die gefuellt werden soll
 	 */
 	public void setComboBox(ComboBox<String> cB) {
-		File f = new File("C:\\Users\\Dominic\\Desktop\\SEII_Project\\SE\\src\\Main\\user.txt");
-		
+		String dir = System.getProperty("user.dir");
+		File f = new File(dir+"/src/Main/user.txt");
 		
 		try{
 			Scanner scan = new Scanner(f);

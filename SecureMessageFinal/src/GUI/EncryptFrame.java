@@ -1,5 +1,8 @@
 package GUI;
 
+import java.io.File;
+import java.util.Scanner;
+
 import javax.crypto.spec.SecretKeySpec;
 
 import Main.Message;
@@ -37,6 +40,7 @@ public class EncryptFrame extends Message {
 	 * Erstellt das Fenster zum Eingeben des Keys, der benoetigt wird um die Nachricht zu verschluesseln
 	 * 
 	 * Der OK-Button ist mit einem Event versehen, welches die Methode encryptMessage aufruft
+	 * Wenn der User einen falschen Key eingibt, oeffnet sich ein Fehlerfenster
 	 * Das Fenster ist modal und die Groeﬂe ist nicht aenderbar, um eine Usereingabe zu gewaehrleisten.
 	 * 
 	 * @param primaryStage Ein Stage-Objekt welches das Hauptprogrammfenster darstellt
@@ -62,7 +66,16 @@ public class EncryptFrame extends Message {
 			@Override
 			public void handle(ActionEvent event) {
 				
-				encryptMessage(primaryStage, msg,OutputField, empf);
+				try {
+					if(tf.getText().equals(getClearKey(empf))) {
+						encryptMessage(primaryStage, msg,OutputField, empf);
+					}else {
+						new Window(primaryStage, "Falscher Key","Fehler");
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				newWindow.close();
 			}
@@ -83,9 +96,10 @@ public class EncryptFrame extends Message {
 	 * @param msg Text der verschluesselt werden soll
 	 * @param OutputField Textfeld in dem der verschluesselte Text dargestellt werden soll
 	 * @param empf Empfaenger an den die Nachricht gesendet werden soll
+	 * @throws Exception 
 	 */
 	
-	public void encryptMessage(Stage primaryStage,String msg,TextArea OutputField,String empf) {
+	public void encryptMessage(Stage primaryStage,String msg,TextArea OutputField,String empf) throws Exception {
 
 		//String msg = encryptField.getText();
 		String msgver = null;
@@ -96,9 +110,6 @@ public class EncryptFrame extends Message {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-
-		System.out.println(msg);
-		System.out.println(Key.getKey(key));
 		
 		try {
 			msgver = Key.encrypt(msg, key);
@@ -106,8 +117,36 @@ public class EncryptFrame extends Message {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		System.out.println(msgver);
 		Key.saveKey(empf,key);
+	}
+	
+	/**
+	 * Entschluesselt die Nachricht und schreibt die entschluesselte Nachricht in das Outputfeld
+	 * 
+	 * Es wird der passende Key aus der Datei keys aus dem Ordner keys geladen. Danach kann die Datei entschluesselt werden
+	 * 
+	 * @param name Name des Empfaengers
+	 */
+	
+	public String getClearKey(String name) throws Exception {
+		File f = new File("keys/clearKeys.txt");
+		Scanner scan = new Scanner(f);
+		String key = null;
+
+		try{
+          while(scan.hasNext()){
+              String line = scan.nextLine().toString();
+              if(line.contains(name)){
+            	  key = line;
+              }
+         }
+        key = key.substring(key.indexOf("#")+1, key.length());
+        scan.close();
+        }
+        catch(Exception fra){
+          System.out.println(fra);
+        }
+        return key;
 	}
 	
 	/**
