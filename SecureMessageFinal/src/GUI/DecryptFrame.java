@@ -41,8 +41,12 @@ public class DecryptFrame extends Message{
 	 * Erstellt das Fenster zum Eingeben des Keys, der benoetigt wird um die Nachricht zu entschluesseln
 	 * 
 	 * Der OK-Button ist mit einem Event versehen, welches die Methode decryptMessage aufruft
+<<<<<<< HEAD
 	 * Wenn der User einen falschen Key eingibt, oeffnet sich ein Fehlerfenster
 	 * Das Fenster ist modal und die Groeße ist nicht aenderbar, um eine Usereingabe zu gewaehrleisten.
+=======
+	 * Das Fenster ist modal und die Groesse ist nicht aenderbar, um eine Usereingabe zu gewaehrleisten.
+>>>>>>> 1b602596efd65fa45fa2e9237bf804e25de01307
 	 * 
 	 * @param primaryStage Ein Stage-Objekt welches das Hauptprogrammfenster darstellt
 	 * @param msg Text der entschluesselt werden soll

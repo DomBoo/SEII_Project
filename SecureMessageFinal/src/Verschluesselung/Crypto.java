@@ -9,19 +9,8 @@ import java.util.Scanner;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-/**
- * Klasse Key fuer Keyerzeugung, Verschluesselung und Entschluesselung. Zusaetzlich mit Hilfsfunktionen um einen Key als String anzuzeigen, einen Key abzuspeichern und einen Key zu importieren.
- * @author Florian Jessner
- *
- */
-public class Key {
-	/**
-	 * 
-	 * Funktion um aus einem String einen Key zu erzeugen.
-	 * @param keyStr Uebergebender String fuer die Keyerzeugung
-	 * @return Es wird ein SecretKeySpec Objekt zurueckgegeben.
-	 * @throws Exception
-	 */
+
+public class Crypto {
 	public static SecretKeySpec keygen(String keyStr) throws Exception{
 		byte[] key = (keyStr).getBytes("UTF-8");
 		MessageDigest sha = MessageDigest.getInstance("SHA-256");
@@ -30,13 +19,7 @@ public class Key {
 		SecretKeySpec secretKeySpec = new SecretKeySpec(key, "AES");
 		return secretKeySpec;
 	}
-	/**
-	 * Verschluesselungfunkion um eine Nachricht zu verschluesseln.
-	 * @param msg Nachricht die zu verschluesseln ist als String
-	 * @param secretKeySpec Den Schluessel fuer die Verschluesselung.
-	 * @return Gibt den verschluesselten Text als String zurueck.
-	 * @throws Exception
-	 */
+	
 	public static String encrypt(String msg, SecretKeySpec secretKeySpec) throws Exception{
 		Cipher cipher = Cipher.getInstance("AES");
 		cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
@@ -44,13 +27,7 @@ public class Key {
 		Encoder myEncoder = Base64.getEncoder();
 	    return myEncoder.encodeToString(encrypted);
 	}
-	/**
-	 * Entschluesselungsfunktion um einen verschluesselten Text zu entschluesseln.
-	 * @param msg Verschluesselte Nachricht als String.
-	 * @param secretKeySpec Der entsprechende Schluessel.
-	 * @return Gibt den entschluesselten Text als String zurueck.
-	 * @throws Exception Wirft eine Exception falls der falsche Key verwendet wurde.
-	 */
+	
 	public static String decrypt(String msg, SecretKeySpec secretKeySpec) throws Exception{	 
 		byte[] crypted = Base64.getDecoder().decode(msg);
 		Cipher cipher = Cipher.getInstance("AES");
@@ -58,24 +35,11 @@ public class Key {
 		byte[] cipherData = cipher.doFinal(crypted);
 		return new String(cipherData);
 	}
-	/**
-	 * Zeigt den Key als String an.
-	 * @param key Das anzuzeigende Keyobjekt.
-	 * @return Gibt den Schluessel als String zurueck.
-	 */
+	
 	public static String getKey(SecretKeySpec key) {
 		return Base64.getEncoder().encodeToString(key.getEncoded());
 	}
-	/**
-<<<<<<< HEAD
-	 * Funktion für die Schluesselspeicherung.
-=======
-	 * Funktion fÃ¼r die Schluesselspeicherung.
->>>>>>> 1b602596efd65fa45fa2e9237bf804e25de01307
-	 * @param name Name des Mitarbeiters als String.
-	 * @param key Das dazugehoerige Keyobjekt.
-	 * @throws Exception
-	 */
+	
 	public static void saveKey(String name, SecretKeySpec key) throws Exception {
 		File dir = new File("keys/keys");
 		Scanner scan = new Scanner(dir);
@@ -97,7 +61,7 @@ public class Key {
 					}
 					tmp = tmp.substring(0, tmp.length()-1);
 					System.out.println(tmp);
-					tmp = tmp.replace(name + "#" + Key.getKey(Key.importKey(name)), name + "#" + Base64.getEncoder().encodeToString(key.getEncoded()));
+					tmp = tmp.replace(name + "#" + Crypto.getKey(Crypto.importKey(name)), name + "#" + Base64.getEncoder().encodeToString(key.getEncoded()));
 					FileOutputStream fileOut = new FileOutputStream("keys/keys");
 					fileOut.write(tmp.getBytes());
 					fileOut.close();
@@ -115,12 +79,7 @@ public class Key {
 			e.printStackTrace();	
 		}
 	}
-	/**
-	 * Funktion um einen Key aus einer Datei zu importieren.
-	 * @param name Name des Mitarbeiters um entsprechenden Key zu bekommen.
-	 * @return Gibt ein SecretKeySpec-Objekt zurueck.
-	 * @throws Exception
-	 */
+	
 	public static SecretKeySpec importKey(String name) throws Exception {
 		File f = new File("keys/keys");
 		Scanner scan = new Scanner(f);
@@ -145,5 +104,23 @@ public class Key {
         }
 		System.out.println("Beschnittender Sring: " + key);
         return new SecretKeySpec(keydec, 0, keydec.length, "AES");
+	}
+	
+	public static void main(String args[]) throws Exception {
+		String msg = "Ich bin eine geheime Nachricht";
+		String keyst = "76";
+		String msgver;
+		SecretKeySpec key = Crypto.keygen(keyst);
+		
+		System.out.println(msg);
+		System.out.println(Crypto.getKey(key));
+		
+		msgver = Crypto.encrypt(msg, key);
+		System.out.println(msgver);
+		Crypto.saveKey("Helmut" , key);
+		
+		SecretKeySpec keyim = Crypto.importKey("Helga");
+		System.out.println(Crypto.getKey(keyim));
+		//System.out.println(Crypto.decrypt(msgver, keyim));
 	}
 }

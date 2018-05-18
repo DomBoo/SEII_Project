@@ -22,7 +22,11 @@ public class Window {
 	/**
 	 * Konstruktor zum Erstellen von Fenstern
 	 * 
+<<<<<<< HEAD
 	 * Der OK-Button dient zum Schließen des Fensters
+=======
+	 * Der OK-Button dient zum schliessen des Fensters
+>>>>>>> 1b602596efd65fa45fa2e9237bf804e25de01307
 	 * 
 	 * @param primaryStage Stage-Objekt des Hauptprogramms
 	 * @param text Inhalt des Fensters
