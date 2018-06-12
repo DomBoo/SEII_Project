@@ -151,14 +151,7 @@ public class MainFrame {
 		about.setOnAction(new EventHandler<ActionEvent>() {					
 			@Override
 			public void handle(ActionEvent e) {				
-				try {
-					String dir = System.getProperty("user.dir");
-
-					Desktop.getDesktop().open(new File(dir+"/src/GUI/about.txt"));
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				new AboutFrame(primaryStage);
 			}
 		});
 				
@@ -210,7 +203,7 @@ public class MainFrame {
 	 */
 	public void setComboBox(ComboBox<String> cB) {
 		String dir = System.getProperty("user.dir");
-		File f = new File(dir+"/src/Main/user.txt");
+		File f = new File(dir+"\\user.txt");
 		
 		try{
 			Scanner scan = new Scanner(f);

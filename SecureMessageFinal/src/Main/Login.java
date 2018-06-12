@@ -36,8 +36,11 @@ public class Login extends User{
 	 * @param primaryStage Umgebung des Hauptprogramms
 	 */
 	public void createWindow(Stage primaryStage) {
-		primaryStage.setTitle("Login");		
 				
+		String dir = System.getProperty("user.dir");
+		
+		primaryStage.setTitle(dir);
+		
 		grid.setAlignment(Pos.CENTER);
 		grid.setHgap(10);
 		grid.setVgap(10);
@@ -68,7 +71,7 @@ public class Login extends User{
 			}
 		});
 		
-		primaryStage.setResizable(false);
+		//primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 	
@@ -81,16 +84,21 @@ public class Login extends User{
 	 */
 	public void Log(Stage primaryStage) {
 		String dir = System.getProperty("user.dir");
-		
 		try {
-            FileReader UserReader = new FileReader(new File(dir+"/src/Main/user.txt"));
-            FileReader PasswordReader  = new FileReader(new File(dir+"/src/Main/password.txt"));
+            FileReader UserReader = new FileReader(new File(dir+"\\user.txt"));
+            FileReader PasswordReader  = new FileReader(new File(dir+"\\password.txt"));
             
-            BufferedReader UserBuffer = new BufferedReader(UserReader);
-            BufferedReader PasswordBuffer = new BufferedReader(PasswordReader);
+            @SuppressWarnings("resource")
+			BufferedReader UserBuffer = new BufferedReader(UserReader);
+            @SuppressWarnings("resource")
+			BufferedReader PasswordBuffer = new BufferedReader(PasswordReader);
             
             name = UserBuffer.readLine();
             password = PasswordBuffer.readLine();
+            
+            nameLab.setText(name);
+            passwordLab.setText(password);
+            
             while (!name.isEmpty()) {
                 if (name.equals(nameField.getText())) {
                 	name = null;
@@ -102,6 +110,9 @@ public class Login extends User{
                     password = 	PasswordBuffer.readLine();                   
                 }
             }
+            
+            UserBuffer.close();
+            PasswordBuffer.close();
             
         } catch (Exception e1) {
            e1.printStackTrace();

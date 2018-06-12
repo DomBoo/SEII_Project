@@ -4,11 +4,9 @@ import static org.junit.Assert.*;
 
 import javax.crypto.spec.SecretKeySpec;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import Verschluesselung.Key;
-import javafx.stage.Stage;
 
 public class SecureSafeTest {	
 	@Test
